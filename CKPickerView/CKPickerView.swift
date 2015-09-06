@@ -8,7 +8,7 @@
 import UIKit
 
 
-let kTitleTag = 0x900df00d
+let kTitleTag = 0x90df00d
 let kTitleHeight: CGFloat = 20.0
 
 public class CKPickerView: UIPickerView {
