@@ -24,8 +24,21 @@ class UnitTests: XCTestCase {
     }
     
     func testInit() {
+        // When init a new CKPickerView
         let p = CKPickerView()
-        expect(p.someProperty).to(equal("a string"))
+        
+        expect(p.titles).to(beEmpty())
+        expect(p.titleHeight).to(equal(kTitleHeight))
+    }
+    
+    func testTitles() {
+        // When update titles
+        let p = CKPickerView()
+        let expecedTitles = ["T1", "T2"]
+        
+        p.titles = expecedTitles
+        expect(p.titles).to(equal(expecedTitles))
+        expect(p.titleHeight).to(equal(kTitleHeight))
     }
     
     func testPerformanceExample() {
