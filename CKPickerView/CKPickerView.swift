@@ -9,7 +9,7 @@ import UIKit
 
 
 let kTitleTag = 0x90df00d
-let kTitleHeight: CGFloat = 20.0
+let kTitleHeight: CGFloat = 34.5
 
 public class CKPickerView: UIPickerView {
     
@@ -20,6 +20,7 @@ public class CKPickerView: UIPickerView {
     public var titleHeight: CGFloat = kTitleHeight
 
     public var titles = [String]()
+    
     
     // MARK: Intializers
     
@@ -51,6 +52,13 @@ public class CKPickerView: UIPickerView {
             view.frame.origin.y += titleHeight
         }
         frame.size.height += titleHeight
+    }
+    
+    override public func intrinsicContentSize() -> CGSize {
+        // Update prefer size
+        var size = super.intrinsicContentSize()
+        size.height += titleHeight
+        return size
     }
     
     // MARK: - Private Implementations
