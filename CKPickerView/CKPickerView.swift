@@ -19,7 +19,27 @@ public class CKPickerView: UIPickerView {
     
     public var titleHeight: CGFloat = kTitleHeight
 
-    public var titles = [String]()
+    public var titles: [String] {
+        get {
+            var strings = [String]()
+            
+            for title in attributedTitles {
+                strings.append(title.string)
+            }
+            
+            return strings
+        }
+        
+        set(value) {
+            attributedTitles.removeAll()
+            
+            for string in value {
+                attributedTitles.append(NSAttributedString(string: string))
+            }
+        }
+    }
+    
+    public var attributedTitles = [NSAttributedString]()
     
     public var selectionIndicatorColor = UIColor.blackColor() {
         didSet {
@@ -33,7 +53,7 @@ public class CKPickerView: UIPickerView {
     
     public override func layoutSubviews() {
         
-        if titles.isEmpty {
+        if attributedTitles.isEmpty {
             return super.layoutSubviews()
         }
         
@@ -89,11 +109,11 @@ public class CKPickerView: UIPickerView {
         var constraint = ""
         var views = [String: UIView]()
         
-        for (i, title) in titles.enumerate() {
+        for (i, title) in attributedTitles.enumerate() {
             
             // Bootstrap UILabel
             let label = UILabel()
-            label.text = title
+            label.attributedText = title
             label.tag = kTitleTag + i
             label.textAlignment = NSTextAlignment.Center
             label.translatesAutoresizingMaskIntoConstraints = false

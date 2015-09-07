@@ -26,7 +26,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         picker1.delegate = self
         picker1.dataSource = self
         
-        picker2.titles = ["Title 1", "Title 2"]
+        picker2.attributedTitles = [
+            NSAttributedString(string: "Title 1", attributes: [
+                NSForegroundColorAttributeName: UIColor.whiteColor()
+            ]),
+            NSAttributedString(string: "Title 2", attributes: [
+                NSForegroundColorAttributeName: UIColor.whiteColor()
+            ]),
+        ]
         picker2.delegate = self
         picker2.dataSource = self
         picker2.selectRow(5000, inComponent: 0, animated: true)
