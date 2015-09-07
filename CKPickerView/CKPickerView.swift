@@ -21,12 +21,17 @@ public class CKPickerView: UIPickerView {
 
     public var titles = [String]()
     
+    public var selectionIndicatorColor = UIColor.blackColor() {
+        didSet {
+            updateIndicatorsColor()
+        }
+    }
     
     // MARK: Intializers
     
     // MARK: UIView
     
-    override public func layoutSubviews() {
+    public override func layoutSubviews() {
         
         if titles.isEmpty {
             return super.layoutSubviews()
@@ -54,16 +59,30 @@ public class CKPickerView: UIPickerView {
         frame.size.height += titleHeight
     }
     
-    override public func intrinsicContentSize() -> CGSize {
+    public override func intrinsicContentSize() -> CGSize {
         // Update prefer size
         var size = super.intrinsicContentSize()
         size.height += titleHeight
         return size
     }
     
+    // Triggerd by layoutSubviews
+    public override func didAddSubview(subview: UIView) {
+        super.didAddSubview(subview)
+        
+        // Matching Selection Indicator
+        if subview.frame.height == 0.5 && !selectionIndicators.contains(subview) {
+            selectionIndicators.append(subview)
+            
+            subview.backgroundColor = selectionIndicatorColor
+        }
+    }
+    
     // MARK: - Private Implementations
     
     private var labelsConfigured = false
+    
+    private var selectionIndicators = [UIView]()
     
     private func configureLabels() {
         var constraints = [NSLayoutConstraint]()
@@ -102,6 +121,12 @@ public class CKPickerView: UIPickerView {
         addConstraints(constraints)
         
         labelsConfigured = true
+    }
+    
+    private func updateIndicatorsColor() {
+        for view in selectionIndicators {
+            view.backgroundColor = selectionIndicatorColor
+        }
     }
 }
 
