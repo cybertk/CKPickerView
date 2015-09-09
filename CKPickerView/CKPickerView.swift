@@ -8,7 +8,6 @@
 import UIKit
 
 
-let kTitleTag = 0x90df00d
 let kTitleHeight: CGFloat = 34.5
 
 public class CKPickerView: UIPickerView {
@@ -47,18 +46,13 @@ public class CKPickerView: UIPickerView {
         }
     }
     
-    public var selectionBackgroundColor: UIColor? {
-        didSet {
-//            layoutSelectionBackgroundViewIfNeeded()
-        }
-    }
+    public var selectionBackgroundColor: UIColor?
     
     // MARK: Intializers
     
     // MARK: UIView
     
     public override func layoutSubviews() {
-        
         defer {
             layoutSelectionBackgroundViewIfNeeded()
         }
@@ -67,28 +61,29 @@ public class CKPickerView: UIPickerView {
             return super.layoutSubviews()
         }
         
-        if !labelsConfigured {
-            configureLabels()
-        }
+        layoutTitleLabelsIfNeeded()
         
         // Pretend that our height without title
         frame.size.height -= titleHeight
-        
-        super.layoutSubviews()
-        
-        // Recover pretending
-        for view in subviews {
-            if view.tag >= kTitleTag && view.tag < kTitleTag + titles.count {
-                // Do nothing for title labels
-                continue
-            }
-            
-            // Move picker views down
-            view.frame.origin.y += titleHeight
+        defer {
+            frame.size.height += titleHeight
         }
-        frame.size.height += titleHeight
+        
+        // UIPickerView behaviour observes:
+        // 1. super.layoutSubviews() will never touch subviews' frame.origin.y
+        super.layoutSubviews()
+
+        // Determine whether adjusted subviews
+        guard let bodyView = subviews.first where bodyView.frame.origin.y != titleHeight else {
+            return
+        }
+        
+        // Move down all subviews except titles
+        subviews
+            .filter  { !$0.isKindOfClass(UILabel) }
+            .forEach { $0.frame.origin.y += titleHeight }
     }
-    
+
     public override func intrinsicContentSize() -> CGSize {
         // Update prefer size
         var size = super.intrinsicContentSize()
@@ -110,54 +105,44 @@ public class CKPickerView: UIPickerView {
     
     // MARK: - Private Implementations
     
-    private var labelsConfigured = false
-    
+    private var titleLabels = [UILabel]()
+
     private var selectionIndicators = [UIView]()
-    
+
     private var selectionBackgroundView: UIView?
-    
-    private func configureLabels() {
-        var constraints = [NSLayoutConstraint]()
-        var constraint = ""
-        var views = [String: UIView]()
-        
-        for (i, title) in attributedTitles.enumerate() {
-            
-            // Bootstrap UILabel
-            let label = UILabel()
-            label.attributedText = title
-            label.tag = kTitleTag + i
-            label.textAlignment = NSTextAlignment.Center
-            label.translatesAutoresizingMaskIntoConstraints = false
-            
-            addSubview(label)
-            
-            views["label\(i)"] = label
-            
-            if i == 0 {
-                constraint += "H:|-0-[label0]"
-            } else {
-                constraint += "-[label\(i)(==label0)]"
-            }
-            
-            if i == titles.count - 1 {
-                constraint += "-0-|"
-            }
-            
-            constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[label\(i)(\(titleHeight))]", options: NSLayoutFormatOptions.AlignAllTop, metrics: nil, views: views)
-        }
-        
-        // Horizontal constraint
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat(constraint, options: NSLayoutFormatOptions.AlignAllTop, metrics: nil, views: views)
-        
-        addConstraints(constraints)
-        
-        labelsConfigured = true
-    }
     
     private func updateIndicatorsColor() {
         for view in selectionIndicators {
             view.backgroundColor = selectionIndicatorColor
+        }
+    }
+    
+    private func layoutTitleLabelsIfNeeded() {
+        
+        // Do not need layout if no titles are set
+        guard !attributedTitles.isEmpty else {
+            return
+        }
+        
+        // Initialize titleLabel if does not
+        if titleLabels.isEmpty {
+            for title in attributedTitles {
+                let label = UILabel()
+                label.attributedText = title
+                label.textAlignment = .Center
+                
+                titleLabels.append(label)
+                addSubview(label)
+            }
+        }
+    
+        // Layout
+        for (i, label) in titleLabels.enumerate() {
+            let width: CGFloat = frame.width / CGFloat(titleLabels.count)
+            label.frame.origin.x = 0 + width * CGFloat(i)
+            label.frame.origin.y = 0
+            label.frame.size.width = width
+            label.frame.size.height = titleHeight
         }
     }
     
@@ -183,6 +168,3 @@ public class CKPickerView: UIPickerView {
         selectionBackgroundView!.backgroundColor = color
     }
 }
-
-
-
