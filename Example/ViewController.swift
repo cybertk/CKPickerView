@@ -16,6 +16,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet weak var picker1: CKPickerView!
     @IBOutlet weak var picker2: CKPickerView!
+    @IBOutlet weak var picker3: CKPickerView!
     
     // MARK: - Overrides
 
@@ -40,6 +41,15 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         picker2.selectRow(5001, inComponent: 1, animated: true)
         picker2.backgroundColor = UIColor.blackColor()
         picker2.selectionIndicatorColor = UIColor.whiteColor()
+        
+//        picker3.titles = ["Title 1", "Title 2", "Title 3"]
+        picker3.delegate = self
+        picker3.dataSource = self
+        picker3.selectRow(5000, inComponent: 0, animated: true)
+        picker3.selectRow(5001, inComponent: 1, animated: true)
+        picker3.selectRow(5002, inComponent: 1, animated: true)
+        picker3.selectionBackgroundColor = UIColor.greenColor()
+//        picker3.selectionIndicatorColor = UIColor.redColor()
     }
     
     // MARK: - UIPickerViewDataSource
@@ -53,6 +63,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             return 2
         }
         
+        if pickerView == picker3 {
+            return 3
+        }
+        
         return 0
     }
     
@@ -62,6 +76,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
         
         if pickerView == picker2 {
+            return 15_000
+        }
+        
+        if pickerView == picker3 {
             return 15_000
         }
         
@@ -80,6 +98,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 NSForegroundColorAttributeName: UIColor.whiteColor()
             ])
 
+            return s
+        }
+        
+        if pickerView == picker3 {
+            let s = NSAttributedString(string: "A\(row % 30)", attributes: [
+                NSForegroundColorAttributeName: UIColor.blueColor()
+                ])
+            
             return s
         }
         

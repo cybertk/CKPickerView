@@ -47,11 +47,21 @@ public class CKPickerView: UIPickerView {
         }
     }
     
+    public var selectionBackgroundColor: UIColor? {
+        didSet {
+//            layoutSelectionBackgroundViewIfNeeded()
+        }
+    }
+    
     // MARK: Intializers
     
     // MARK: UIView
     
     public override func layoutSubviews() {
+        
+        defer {
+            layoutSelectionBackgroundViewIfNeeded()
+        }
         
         if attributedTitles.isEmpty {
             return super.layoutSubviews()
@@ -104,6 +114,8 @@ public class CKPickerView: UIPickerView {
     
     private var selectionIndicators = [UIView]()
     
+    private var selectionBackgroundView: UIView?
+    
     private func configureLabels() {
         var constraints = [NSLayoutConstraint]()
         var constraint = ""
@@ -147,6 +159,28 @@ public class CKPickerView: UIPickerView {
         for view in selectionIndicators {
             view.backgroundColor = selectionIndicatorColor
         }
+    }
+    
+    private func layoutSelectionBackgroundViewIfNeeded() {
+        
+        guard let color = selectionBackgroundColor else {
+            return
+        }
+        
+        if selectionBackgroundView == nil {
+            selectionBackgroundView = UIView()
+            // Add selectionBackgroundView as background
+            insertSubview(selectionBackgroundView!, atIndex: 0)
+        }
+        
+        var frame = CGRect()
+        frame.origin.x = 0
+        frame.origin.y = selectionIndicators[0].frame.origin.y
+        frame.size.width = selectionIndicators[0].frame.width
+        frame.size.height = selectionIndicators[1].frame.origin.y - selectionIndicators[0].frame.origin.y
+
+        selectionBackgroundView!.frame = frame
+        selectionBackgroundView!.backgroundColor = color
     }
 }
 
