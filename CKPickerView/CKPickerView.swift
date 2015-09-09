@@ -38,7 +38,11 @@ public class CKPickerView: UIPickerView {
         }
     }
     
+    // attributed titles is favored against titles
     public var attributedTitles = [NSAttributedString]()
+    
+    // titleView is favored against attributed titles and titles
+    public var titleView: UIView?
     
     public var selectionIndicatorColor = UIColor.blackColor() {
         didSet {
@@ -57,7 +61,7 @@ public class CKPickerView: UIPickerView {
             layoutSelectionBackgroundViewIfNeeded()
         }
         
-        if attributedTitles.isEmpty {
+        if attributedTitles.isEmpty && titleView == nil {
             return super.layoutSubviews()
         }
         
@@ -68,19 +72,21 @@ public class CKPickerView: UIPickerView {
         defer {
             frame.size.height += titleHeight
         }
-        
+
         // UIPickerView behaviour observes:
         // 1. super.layoutSubviews() will never touch subviews' frame.origin.y
         super.layoutSubviews()
 
-        // Determine whether adjusted subviews
-        guard let bodyView = subviews.first where bodyView.frame.origin.y != titleHeight else {
+        // Find bodyView which is the most height view and update subviews' y if have not
+        let bodyView = subviews.reduce(subviews[0]) { $0.frame.height > $1.frame.height ? $0 : $1 }
+        guard bodyView.frame.origin.y != titleHeight else {
             return
         }
         
         // Move down all subviews except titles
         subviews
             .filter  { !$0.isKindOfClass(UILabel) }
+            .filter  { $0 != titleView }
             .forEach { $0.frame.origin.y += titleHeight }
     }
 
@@ -118,6 +124,14 @@ public class CKPickerView: UIPickerView {
     }
     
     private func layoutTitleLabelsIfNeeded() {
+        
+        // Prefer titleView
+        if let titleView = titleView where !subviews.contains(titleView) {
+            addSubview(titleView)
+            titleView.frame = CGRect(x: 0, y: 0, width: frame.width, height: titleHeight)
+            titleView.autoresizingMask = .FlexibleWidth
+            return
+        }
         
         // Do not need layout if no titles are set
         guard !attributedTitles.isEmpty else {

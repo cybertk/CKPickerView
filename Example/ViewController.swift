@@ -42,14 +42,18 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         picker2.backgroundColor = UIColor.blackColor()
         picker2.selectionIndicatorColor = UIColor.whiteColor()
         
-//        picker3.titles = ["Title 1", "Title 2", "Title 3"]
+        let titleLabel = UILabel()
+        titleLabel.backgroundColor = UIColor.grayColor()
+        titleLabel.text = "Title"
+        titleLabel.textAlignment = .Right
+        titleLabel.textColor = UIColor.whiteColor()
+        picker3.titleView = titleLabel
         picker3.delegate = self
         picker3.dataSource = self
         picker3.selectRow(5000, inComponent: 0, animated: true)
         picker3.selectRow(5001, inComponent: 1, animated: true)
         picker3.selectRow(5002, inComponent: 1, animated: true)
-        picker3.selectionBackgroundColor = UIColor.greenColor()
-//        picker3.selectionIndicatorColor = UIColor.redColor()
+        picker3.selectionBackgroundColor = UIColor.grayColor()
     }
     
     // MARK: - UIPickerViewDataSource
