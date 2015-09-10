@@ -23,10 +23,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // configure picker1
         picker1.titles = ["Title"]
         picker1.delegate = self
         picker1.dataSource = self
         
+        // configure picker2
         picker2.attributedTitles = [
             NSAttributedString(string: "Title 1", attributes: [
                 NSForegroundColorAttributeName: UIColor.whiteColor()
@@ -42,17 +44,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         picker2.backgroundColor = UIColor.blackColor()
         picker2.selectionIndicatorColor = UIColor.whiteColor()
         
-        let titleLabel = UILabel()
-        titleLabel.backgroundColor = UIColor.grayColor()
-        titleLabel.text = "Title"
-        titleLabel.textAlignment = .Right
-        titleLabel.textColor = UIColor.whiteColor()
-        picker3.titleView = titleLabel
+        // configure picker3
+        picker3.titleView = PickerTitleView()
         picker3.delegate = self
         picker3.dataSource = self
         picker3.selectRow(5000, inComponent: 0, animated: true)
         picker3.selectRow(5001, inComponent: 1, animated: true)
-        picker3.selectRow(5002, inComponent: 1, animated: true)
+        picker3.selectRow(5002, inComponent: 2, animated: true)
         picker3.selectionBackgroundColor = UIColor.grayColor()
     }
     
