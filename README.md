@@ -7,7 +7,9 @@
 [![Version](https://img.shields.io/cocoapods/v/CKPickerView.svg?style=flat)](http://cocoapods.org/pods/CKPickerView)
 [![Platform](https://img.shields.io/cocoapods/p/CKPickerView.svg?style=flat)](http://cocoapods.org/pods/CKPickerView)
 
-![](https://cloud.githubusercontent.com/assets/455809/9780622/c49c5610-57bd-11e5-8d06-cc55ea706a5b.png) ![](https://cloud.githubusercontent.com/assets/455809/9780686/849187c4-57be-11e5-8e6c-3323faa91fbe.png)
+![screenshot 1](https://cloud.githubusercontent.com/assets/455809/9780931/41d37bec-57c1-11e5-8269-d9c34983f3a1.png)
+![screenshot 2](https://cloud.githubusercontent.com/assets/455809/9780934/5074bcf6-57c1-11e5-982f-0c9f8ef37283.png)
+
 ## Features
 
 - Add **Titles** on top of UIPickerView thru
