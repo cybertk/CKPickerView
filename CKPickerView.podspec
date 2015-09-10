@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name             = "CKPickerView"
   s.version          = "0.1.0"
-  s.summary          = "A short description"
+  s.summary          = "A UIPickerView drop-in replacement with support for titles and Selection Indicator customization"
   s.description      = <<-DESC
-                       a longer description
+                       A UIPickerView drop-in replacement with support for titles and Selection Indicator customization
                        DESC
 
   s.homepage         = "https://github.com/cybertk/CKPickerView"
