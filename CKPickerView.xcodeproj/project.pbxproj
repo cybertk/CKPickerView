@@ -10,6 +10,8 @@
 		9208B45D1B8EBDE000C1631B /* CKPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9208B45C1B8EBDE000C1631B /* CKPickerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9208B4641B8EBDE000C1631B /* CKPickerView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9208B4591B8EBDE000C1631B /* CKPickerView.framework */; };
 		9208B4691B8EBDE000C1631B /* UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208B4681B8EBDE000C1631B /* UnitTests.swift */; };
+		921AAC381B9C3D4C004AAB3B /* CKPickerView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9208B4591B8EBDE000C1631B /* CKPickerView.framework */; };
+		921AAC391B9C3D4C004AAB3B /* CKPickerView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9208B4591B8EBDE000C1631B /* CKPickerView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		92DC99081B8EF03100350407 /* CKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC99071B8EF03100350407 /* CKPickerView.swift */; settings = {ASSET_TAGS = (); }; };
 		92DC990A1B9215EE00350407 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92DC99091B9215EE00350407 /* Nimble.framework */; };
 		92DC99291B93418500350407 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DC99281B93418500350407 /* AppDelegate.swift */; };
@@ -17,7 +19,7 @@
 		92DC992E1B93418500350407 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92DC992C1B93418500350407 /* Main.storyboard */; };
 		92DC99301B93418500350407 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92DC992F1B93418500350407 /* Assets.xcassets */; };
 		92DC99331B93418500350407 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92DC99311B93418500350407 /* LaunchScreen.storyboard */; };
-		92DC993A1B93547600350407 /* CKPickerView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9208B4591B8EBDE000C1631B /* CKPickerView.framework */; };
+		92F7AFDC1BA187650090A3AA /* PickerTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7AFDB1BA187650090A3AA /* PickerTitleView.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +30,28 @@
 			remoteGlobalIDString = 9208B4581B8EBDE000C1631B;
 			remoteInfo = CKPickerView;
 		};
+		921AAC351B9C3CBB004AAB3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9208B4501B8EBDE000C1631B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9208B4581B8EBDE000C1631B;
+			remoteInfo = CKPickerView;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		921AAC371B9C3CBB004AAB3B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				921AAC391B9C3D4C004AAB3B /* CKPickerView.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9208B4591B8EBDE000C1631B /* CKPickerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CKPickerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +69,7 @@
 		92DC992F1B93418500350407 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92DC99321B93418500350407 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92DC99341B93418500350407 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92F7AFDB1BA187650090A3AA /* PickerTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTitleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92DC993A1B93547600350407 /* CKPickerView.framework in Frameworks */,
+				921AAC381B9C3D4C004AAB3B /* CKPickerView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +149,7 @@
 				92DC992F1B93418500350407 /* Assets.xcassets */,
 				92DC99311B93418500350407 /* LaunchScreen.storyboard */,
 				92DC99341B93418500350407 /* Info.plist */,
+				92F7AFDB1BA187650090A3AA /* PickerTitleView.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -195,10 +220,12 @@
 				92DC99221B93418500350407 /* Sources */,
 				92DC99231B93418500350407 /* Frameworks */,
 				92DC99241B93418500350407 /* Resources */,
+				921AAC371B9C3CBB004AAB3B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				921AAC361B9C3CBB004AAB3B /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -312,6 +339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92F7AFDC1BA187650090A3AA /* PickerTitleView.swift in Sources */,
 				92DC992B1B93418500350407 /* ViewController.swift in Sources */,
 				92DC99291B93418500350407 /* AppDelegate.swift in Sources */,
 			);
@@ -324,6 +352,11 @@
 			isa = PBXTargetDependency;
 			target = 9208B4581B8EBDE000C1631B /* CKPickerView */;
 			targetProxy = 9208B4651B8EBDE000C1631B /* PBXContainerItemProxy */;
+		};
+		921AAC361B9C3CBB004AAB3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9208B4581B8EBDE000C1631B /* CKPickerView */;
+			targetProxy = 921AAC351B9C3CBB004AAB3B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -449,7 +482,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cybertk.CKPickerView";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cybertk.CKPickerView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -469,7 +502,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cybertk.CKPickerView";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cybertk.CKPickerView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -484,7 +517,7 @@
 				);
 				INFOPLIST_FILE = UnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cybertk.UnitTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cybertk.UnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -498,7 +531,7 @@
 				);
 				INFOPLIST_FILE = UnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cybertk.UnitTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cybertk.UnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -507,9 +540,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cybertk.CKPickerView.Example";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cybertk.CKPickerView.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -518,9 +552,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cybertk.CKPickerView.Example";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cybertk.CKPickerView.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

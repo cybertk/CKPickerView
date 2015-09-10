@@ -24,8 +24,38 @@ class UnitTests: XCTestCase {
     }
     
     func testInit() {
+        // When init a new CKPickerView
         let p = CKPickerView()
-        expect(p.someProperty).to(equal("a string"))
+        
+        expect(p.titles).to(beEmpty())
+        expect(p.titleHeight).to(equal(kTitleHeight))
+    }
+    
+    func testTitles() {
+        // When update titles
+        let p = CKPickerView()
+        let expectedTitles = ["T1", "T2"]
+        let expectedAttributedTitles = [NSAttributedString(string: "T1"), NSAttributedString(string: "T2")]
+        
+        p.titles = expectedTitles
+        expect(p.titles).to(equal(expectedTitles))
+        expect(p.attributedTitles).to(equal(expectedAttributedTitles))
+        expect(p.titleHeight).to(equal(kTitleHeight))
+    }
+    
+    func testAttributedTitles() {
+        // When update attributedTitles
+        let p = CKPickerView()
+        let expectedTitles = ["T1", "T2"]
+        let expectedAttributedTitles =  [
+            NSAttributedString(string: "T1", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()]),
+            NSAttributedString(string: "T2", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()]),
+        ]
+        
+        p.attributedTitles = expectedAttributedTitles
+        expect(p.titles).to(equal(expectedTitles))
+        expect(p.attributedTitles).to(equal(expectedAttributedTitles))
+        expect(p.titleHeight).to(equal(kTitleHeight))
     }
     
     func testPerformanceExample() {
