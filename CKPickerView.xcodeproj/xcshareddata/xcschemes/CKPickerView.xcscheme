@@ -43,7 +43,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9218CA6F1B9C333A00CD12C9"
+               BlueprintIdentifier = "92F818901BA32D7200B3E9EE"
                BuildableName = "UITests.xctest"
                BlueprintName = "UITests"
                ReferencedContainer = "container:CKPickerView.xcodeproj">

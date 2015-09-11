@@ -62,7 +62,9 @@ public class CKPickerView: UIPickerView {
         }
         
         if attributedTitles.isEmpty && titleView == nil {
-            return super.layoutSubviews()
+            super.layoutSubviews()
+            
+            return
         }
         
         layoutTitleLabelsIfNeeded()
@@ -109,13 +111,13 @@ public class CKPickerView: UIPickerView {
         }
     }
     
-    // MARK: - Private Implementations
+    // MARK: - Internal Implementations
     
-    private var titleLabels = [UILabel]()
+    var titleLabels = [UILabel]()
 
-    private var selectionIndicators = [UIView]()
+    var selectionIndicators = [UIView]()
 
-    private var selectionBackgroundView: UIView?
+    var selectionBackgroundView: UIView?
     
     private func updateIndicatorsColor() {
         for view in selectionIndicators {
