@@ -111,13 +111,13 @@ public class CKPickerView: UIPickerView {
     
     // MARK: - Private Implementations
     
-    private var titleLabels = [UILabel]()
+    var titleLabels = [UILabel]()
 
-    private var selectionIndicators = [UIView]()
+    var selectionIndicators = [UIView]()
 
-    private var selectionBackgroundView: UIView?
+    var selectionBackgroundView: UIView?
     
-    private func updateIndicatorsColor() {
+    private func updateIndicatorsColor() {        
         for view in selectionIndicators {
             view.backgroundColor = selectionIndicatorColor
         }
