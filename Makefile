@@ -1,9 +1,24 @@
 SHELL = /bin/bash -o pipefail
-DESTINATION ?= platform=iOS Simulator,name=iPhone 6,OS=9.0
-
 project = CKPickerView
 
+# Test Parameters
+PLATFORM ?= iOS Simulator
+NAME ?= iPhone 6
+OS ?= 9.0
+DESTINATION ?= platform=$(PLATFORM),name=$(NAME),OS=$(OS)
+
+
+ifeq ($(TRAVIS_CI),true)
+
+ifeq ($(TRAVIS_MATRIX_LEADER),true)
 test: test-unit test-carthage test-cocoapods
+else
+test: test-unit
+endif
+
+else
+test: test-unit test-carthage test-cocoapods
+endif
 
 test-unit:
 	xcodebuild test -scheme $(project) -destination "$(DESTINATION)" ONLY_ACTIVE_ARCH=NO OBJROOT=$(PWD)/build SYMROOT=$(PWD)/build | xcpretty
