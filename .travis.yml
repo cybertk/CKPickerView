@@ -8,6 +8,8 @@ env:
     - DESTINATION='platform=iOS Simulator,name=iPhone 6 Plus,OS=9.0'
     - DESTINATION='platform=iOS Simulator,name=iPhone 6s,OS=9.0'
     - DESTINATION='platform=iOS Simulator,name=iPhone 6s Plus,OS=9.0'
+    - A=1
+    - A=2
 install:
     - make bootstrap
 before_script:
