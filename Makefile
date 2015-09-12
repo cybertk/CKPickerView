@@ -8,14 +8,8 @@ OS ?= 9.0
 DESTINATION ?= platform=$(PLATFORM),name=$(NAME),OS=$(OS)
 
 
-ifeq ($(TRAVIS_CI),true)
-
-ifeq ($(TRAVIS_MATRIX_LEADER),true)
-test: test-unit test-carthage test-cocoapods
-else
+ifeq ($(TRAVIS)$(TRAVIS_MATRIX_LEADER),true)
 test: test-unit
-endif
-
 else
 test: test-unit test-carthage test-cocoapods
 endif
@@ -31,15 +25,7 @@ test-cocoapods:
 
 bootstrap:
 	bundle install
-
-   # Detect Travis CI, see http://docs.travis-ci.com/user/environment-variables/
-ifeq ($(TRAVIS_CI),true)
-   # Cannot brew install carthage on Travis-CI
-	curl -OL https://github.com/Carthage/Carthage/releases/download/0.8/Carthage.pkg
-	sudo /usr/sbin/installer -pkg Carthage.pkg -target /
-else
 	brew install carthage
-endif
 
 deps:
 	carthage bootstrap --verbose | xcpretty
