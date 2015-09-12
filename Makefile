@@ -1,10 +1,12 @@
 SHELL = /bin/bash -o pipefail
+DESTINATION ?= platform=iOS Simulator,name=iPhone 6,OS=9.0
+
 project = CKPickerView
 
 test: test-unit test-carthage test-cocoapods
 
 test-unit:
-	xcodebuild test -scheme $(project) -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO OBJROOT=$(PWD)/build SYMROOT=$(PWD)/build | xcpretty
+	xcodebuild test -scheme $(project) -destination "$(DESTINATION)" ONLY_ACTIVE_ARCH=NO OBJROOT=$(PWD)/build SYMROOT=$(PWD)/build | xcpretty
 
 test-carthage:
 	carthage build --verbose --no-skip-current | xcpretty
