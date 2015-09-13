@@ -15,7 +15,7 @@ test: test-unit test-carthage test-cocoapods
 endif
 
 test-unit:
-	xcodebuild test -scheme $(project) -destination "$(DESTINATION)" ONLY_ACTIVE_ARCH=NO OBJROOT=$(PWD)/build SYMROOT=$(PWD)/build | xcpretty
+	xcodebuild test -scheme $(project) -destination "$(DESTINATION)" ONLY_ACTIVE_ARCH=NO OBJROOT=$(PWD)/build SYMROOT=$(PWD)/build 
 
 test-carthage:
 	carthage build --verbose --no-skip-current | xcpretty
