@@ -73,22 +73,22 @@ class UnitTests: XCTestCase {
     }
     
     func testSelectionIndicatorColor() {
+        let expectedColor = UIColor.grayColor()
         var p: CKPickerView!
         
         // Given set selectionBackgroundColor
         p = CKPickerView(frame: CGRect(x: 0, y: 0, width: 600, height: 600))
-        p.selectionBackgroundColor = UIColor.grayColor()
+        p.selectionIndicatorColor = expectedColor
         p.dataSource = dataSource
-        //        p.frame = CGRect(x: 0, y: 0, width: 600, height: 600)
         
-        // When layout
-        
-//        UIApplication.sharedApplication().windows.first?.addSubview(p)
+        // When layout in window
         window.addSubview(p)
         p.layoutSubviews()
         
-        // It should detected selection indicators
+        // It should detect selection indicators
         expect(p.selectionIndicators.count).to(equal(2))
+        // It should display with expected color
+        expect(p.selectionIndicators.first?.backgroundColor).to(equal(expectedColor))
     }
     
     func testPerformanceExample() {

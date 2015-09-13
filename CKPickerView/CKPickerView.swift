@@ -58,6 +58,7 @@ public class CKPickerView: UIPickerView {
     
     public override func layoutSubviews() {
         defer {
+            configureSelectionIndicators()
             layoutSelectionBackgroundViewIfNeeded()
         }
         
@@ -75,6 +76,7 @@ public class CKPickerView: UIPickerView {
 
         // UIPickerView behaviour observes:
         // 1. super.layoutSubviews() will never touch subviews' frame.origin.y
+        // 2. All subviews of UIPickerView in created in first super.layoutSubview()
         super.layoutSubviews()
 
         // Find bodyView which is the most height view and update subviews' y if have not
@@ -97,18 +99,6 @@ public class CKPickerView: UIPickerView {
         return size
     }
     
-    // Triggerd by layoutSubviews
-    public override func didAddSubview(subview: UIView) {
-        super.didAddSubview(subview)
-        
-        // Matching Selection Indicator
-        if subview.frame.height == 0.5 && !selectionIndicators.contains(subview) {
-            selectionIndicators.append(subview)
-            
-            subview.backgroundColor = selectionIndicatorColor
-        }
-    }
-    
     // MARK: - Private Implementations
     
     var titleLabels = [UILabel]()
@@ -117,10 +107,37 @@ public class CKPickerView: UIPickerView {
 
     var selectionBackgroundView: UIView?
     
-    private func updateIndicatorsColor() {        
+    private func updateIndicatorsColor() {
         for view in selectionIndicators {
             view.backgroundColor = selectionIndicatorColor
         }
+    }
+    
+    private func configureSelectionIndicators() {
+        
+        guard selectionIndicators.isEmpty else {
+            return
+        }
+        
+        // Matching Selection Indicator
+        let heightMap = subviews
+            .reduce([CGFloat: [UIView]]()) { (var map, view) in
+                map[view.frame.height] = map[view.frame.height] ?? []
+                map[view.frame.height]!.append(view)
+                return map
+            }
+            // selectionIndicator is 0.66667px on 6+/6s+, and 0.5px for other models
+            // See https://github.com/cybertk/CKPickerView/pull/3
+            .filter { (height, views) in views.count == 2 && height < 1 }
+        
+        
+        guard let indicators = heightMap.first?.1 where heightMap.count == 1 else {
+            print("CKPickerView: Failed to detect selectionIndicators")
+            return
+        }
+        
+        selectionIndicators = indicators
+        updateIndicatorsColor()
     }
     
     private func layoutTitleLabelsIfNeeded() {
