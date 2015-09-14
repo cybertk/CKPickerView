@@ -13,6 +13,20 @@ import Nimble
 
 class UnitTests: XCTestCase {
     
+    class TestDataSource: NSObject, UIPickerViewDataSource {
+        
+        func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+            return 100
+        }
+        
+        func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+            return 1
+        }
+    }
+    
+    var window = UIView(frame: CGRect(x: 0, y: 0, width: 600, height: 600))
+    var dataSource = TestDataSource()
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -56,6 +70,25 @@ class UnitTests: XCTestCase {
         expect(p.titles).to(equal(expectedTitles))
         expect(p.attributedTitles).to(equal(expectedAttributedTitles))
         expect(p.titleHeight).to(equal(kTitleHeight))
+    }
+    
+    func testSelectionIndicatorColor() {
+        let expectedColor = UIColor.grayColor()
+        var p: CKPickerView!
+        
+        // Given set selectionBackgroundColor
+        p = CKPickerView(frame: CGRect(x: 0, y: 0, width: 600, height: 600))
+        p.selectionIndicatorColor = expectedColor
+        p.dataSource = dataSource
+        
+        // When layout in window
+        window.addSubview(p)
+        p.layoutSubviews()
+        
+        // It should detect selection indicators
+        expect(p.selectionIndicators.count).to(equal(2))
+        // It should display with expected color
+        expect(p.selectionIndicators.first?.backgroundColor).to(equal(expectedColor))
     }
     
     func testPerformanceExample() {

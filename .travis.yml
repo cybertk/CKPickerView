@@ -1,6 +1,13 @@
 language: objective-c
 os: osx
 osx_image: xcode7
+env:
+    # List by `instruments -s devices`
+    - NAME='iPhone 5s'
+    - NAME='iPhone 6' TRAVIS_MATRIX_LEADER=true
+    - NAME='iPhone 6 Plus'
+    - NAME='iPhone 6s'
+    - NAME='iPhone 6s Plus'
 install:
     - make bootstrap
 before_script:
