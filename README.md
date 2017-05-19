@@ -3,6 +3,7 @@
 > A UIPickerView drop-in replacement with support for titles and Selection Indicator customization.
 
 [![CI Status](http://img.shields.io/travis/cybertk/CKPickerView.svg?style=flat)](https://travis-ci.org/cybertk/CKPickerView)
+[![codebeat badge](https://codebeat.co/badges/a726525b-7a1f-43bb-9cb0-4b1acceff875)](https://codebeat.co/projects/github-com-cybertk-ckpickerview-master)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Version](https://img.shields.io/cocoapods/v/CKPickerView.svg?style=flat)](http://cocoapods.org/pods/CKPickerView)
 [![Platform](https://img.shields.io/cocoapods/p/CKPickerView.svg?style=flat)](http://cocoapods.org/pods/CKPickerView)
